@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+		<!-- FORM VIEW -->
+		<record model="ir.ui.view" id="alia_partners_import_wizard_view">
+    		<field name="name">alia.partners.import.wizard.view</field>
+    		<field name="model">alia.partners.import.wizard</field>
+    		<field name="type">form</field>
+    		<field name="arch" type="xml">
+      			<form string="Partners import wizard">
+      			    <label string="This wizard will import partners from a EXCEL file." colspan="4"/>
+                    <label string="There are several options to import partners that you can choose before." colspan="4"/>
+                    <label string="" colspan="4"/>
+                    <newline/>
+                    <group colspan="4">
+                    	<separator string="Excel file to import" colspan="3"/>
+      					<field name="file_to_import" />
+      				</group>
+      				<label string="" colspan="4"/>
+      				<group colspan="4">
+      					<separator string="Preprocess File Options" colspan="4"/>
+      					<field name="omit_init_rows" />
+      					<newline/>
+      					<field name="omit_last_rows" />
+      					<newline/>
+      					<field name="one_step_wizard"/>
+      				</group>
+      				<label string="" colspan="4"/>
+      				<group colspan="4">
+      					<separator string="General Partners Paramenters" colspan="4"/>
+      					<field name="company_id"/>
+      					<newline/>
+      					<field name="vat_prefix"/>
+      				    <newline/>
+      					<field name="omit_incorrect_vat"/>
+      				</group>
+      				<label string="" colspan="4"/>  
+         			<group colspan="4">
+         				<button name="process_file" string="Process File" type="object" />
+         			</group>
+      			</form>
+    		</field>
+   		</record>
+   		
+   		
+   		<record model="ir.ui.view" id="alia_partners_import_process_wizard_view">
+    		<field name="name">alia.partners.import.process.wizard.view</field>
+    		<field name="model">alia.partners.import.wizard</field>
+    		<field name="type">form</field>
+    		<field name="arch" type="xml">
+      			<form string="Account import wizard">
+      				<group>
+          				<field name="partners_list" widget="one2many" height="450" nolabel="1">
+          					<tree editable="top">
+          						<field name="name"></field>
+          						<field name="street"></field>
+          						<field name="city"></field>
+          						<field name="vat"></field>
+          						<field name="zip"></field>
+          						<field name="ref"></field>
+          						<field name="company_id"></field>
+          						<field name="customer"></field>
+          						<field name="supplier"></field>
+          					</tree>
+          				</field>                
+          			</group>
+      				<newline/> 				            
+          			<group>
+         				<button name="create_partners" string="Create partners" type="object" />
+         			</group>
+      			</form>
+    		</field>
+   		</record>   		
+
+	</data>
+</openerp>
