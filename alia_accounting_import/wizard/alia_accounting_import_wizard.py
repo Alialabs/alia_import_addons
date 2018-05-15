@@ -460,7 +460,7 @@ class alia_account_import_wizard(osv.osv_memory):
                 account_move_aux_id = account_aligment.account_move_id
                 account_move_vals['name'] = account_aligment.account_move_id
                 account_move_vals['date'] = account_aligment.account_date
-                account_move_vals['ref'] = account_aligment.account_aligment.account_move_concept
+                account_move_vals['ref'] = account_aligment.account_move_concept
                 account_move_vals['state'] = "draft"
                 account_move_vals['period_id'] = account_aligment.account_period.id
                 account_move_vals['journal_id'] = account_aligment.account_journal.id
