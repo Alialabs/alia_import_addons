@@ -335,7 +335,7 @@ class alia_account_import_wizard(osv.osv_memory):
             wizard_main_obj = self.browse(cr, uid, ids[0])
             xls_file = AliaBaseExcelFileHandler(wizard_main_obj.file_to_import)
             xls_file.load_workbook(True)
-            for sheet in xls_file.get_sheets:
+            for sheet in xls_file.get_sheets():
                 max_column = sheet.max_column
                 max_rows = sheet.max_row - wizard_main_obj.omit_last_rows
                 init_row_range = 1 + wizard_main_obj.omit_init_rows
