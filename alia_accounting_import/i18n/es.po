@@ -1,0 +1,289 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* alia_accounting_import
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-08 14:45+0000\n"
+"PO-Revision-Date: 2018-05-08 14:45+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alia_accounting_import
+#: field:alia.account.import.wizard,name_filter_results_account_move:0
+msgid "Text filter for results account move"
+msgstr "Filtro de texto para el asiento de resultados"
+
+#. module: alia_accounting_import
+#: field:alia.account.import.wizard,omit_init_rows:0
+msgid "Init rows to be omitted"
+msgstr "Número de filas iniciales a omitir"
+
+#. module: alia_accounting_import
+#: field:alia.account.import.wizard,default_journal_id:0
+msgid "Default Journal for account moves"
+msgstr "Diario por defecto para los asientos"
+
+#. module: alia_accounting_import
+#: field:alia.account.account.aligment,account_account:0
+msgid "Account number"
+msgstr "Número de cuenta"
+
+#. module: alia_accounting_import
+#: field:alia.account.import.wizard,one_step_wizard:0
+msgid "Wizard without checking, directly creation"
+msgstr "Creación de asientos directa, sin comprobaciones intermedias"
+
+#. module: alia_accounting_import
+#: model:ir.model,name:alia_accounting_import.model_alia_account_account_match
+msgid "alia.account.account.match"
+msgstr "alia.account.account.match"
+
+#. module: alia_accounting_import
+#: view:alia.account.import.wizard:0
+msgid "Excel file to import"
+msgstr "Fichero EXCEL para importar"
+
+#. module: alia_accounting_import
+#: field:alia.account.import.wizard,name_filter_opening_account_move:0
+msgid "Text filter for opening account move"
+msgstr "Filtro de texto para el asiento de apertura"
+
+#. module: alia_accounting_import
+#: field:alia.account.import.wizard,automatic_account_creation:0
+msgid "Automatic account creation in case of aligment not found"
+msgstr "Creación automática de cuenta en caso de no encontrar coincidencia"
+
+#. module: alia_accounting_import
+#: view:alia.account.import.wizard:0
+msgid "This wizard will import account moves from a EXCEL file."
+msgstr "Este asistente importará asientos desde un fichero EXCEL"
+
+#. module: alia_accounting_import
+#: view:alia.account.import.wizard:0
+msgid "Aligment Account"
+msgstr "Cuenta alineada"
+
+#. module: alia_accounting_import
+#: field:alia.account.import.wizard,override_account_name:0
+msgid "Override Account Names"
+msgstr "Sobreescribir nombres de cuentas"
+
+#. module: alia_accounting_import
+#: field:alia.account.account.aligment,account_move_id:0
+msgid "Account Move ID"
+msgstr "ID del Asiento"
+
+#. module: alia_accounting_import
+#: field:alia.account.account.aligment,account_debit:0
+msgid "Account Debit"
+msgstr "Débito"
+
+#. module: alia_accounting_import
+#: field:alia.account.account.aligment,account_move_line_id:0
+msgid "Account Move Line ID"
+msgstr "ID del Apunte"
+
+#. module: alia_accounting_import
+#: field:alia.account.account.match,account_account_match_id:0
+msgid "Account matching"
+msgstr "Coincidencia de cuenta"
+
+#. module: alia_accounting_import
+#: view:alia.account.import.wizard:0
+msgid "(This option allows to create automatically a new account for aligment in case of not match found)."
+msgstr "(Esta opción permite crear automáticamente una nueva cuenta para alinear en caso de que no existan coincidencias)."
+
+#. module: alia_accounting_import
+#: view:alia.account.import.wizard:0
+msgid "(This option confirm the account moves automatically)."
+msgstr "(Esta opción confirma automáticamente los asientos)."
+
+#. module: alia_accounting_import
+#: view:alia.account.import.wizard:0
+msgid "Account alimgment options"
+msgstr "Opciones de alineamiento de cuentas contables"
+
+#. module: alia_accounting_import
+#: field:alia.account.account.match,account_original_code:0
+msgid "Account Original Number"
+msgstr "Código de cuenta original"
+
+#. module: alia_accounting_import
+#: view:alia.account.import.wizard:0
+msgid "Special Account Moves Filtering"
+msgstr "Filtros especiales para los asientos"
+
+#. module: alia_accounting_import
+#: view:alia.account.import.wizard:0
+msgid "(This option overrides the account name if exists, with the account name from import file)."
+msgstr "(Esta opción sobreescribe el nombre de la cuenta, si esta existe, con el nombre del fichero de importación)."
+
+#. module: alia_accounting_import
+#: model:ir.model,name:alia_accounting_import.model_alia_account_account_aligment
+msgid "alia.account.account.aligment"
+msgstr "alia.account.account.aligment"
+
+#. module: alia_accounting_import
+#: field:alia.account.account.aligment,account_name:0
+#: field:alia.account.account.match,account_name:0
+msgid "Account name"
+msgstr "Nombre de la cuenta"
+
+#. module: alia_accounting_import
+#: selection:alia.account.import.wizard,state:0
+msgid "preprocess"
+msgstr "Preprocesar"
+
+#. module: alia_accounting_import
+#: view:alia.account.import.wizard:0
+msgid "Account creation params"
+msgstr "Parámetros para creación de cuentas"
+
+#. module: alia_accounting_import
+#: field:alia.account.import.wizard,account_creation_on_fly:0
+msgid "Account creation on the fly. ¡HIGH RISK ON THIS PROCEDURE!"
+msgstr "Creación de cuentas al vuelo. (PELIGRO: Esta opción presenta riesgo, porque no se respetan las transacciones internas.)"
+
+#. module: alia_accounting_import
+#: field:alia.account.account.aligment,name:0
+#: field:alia.account.account.match,name:0
+#: field:alia.account.import.wizard,name:0
+msgid "Name"
+msgstr "Nombre"
+
+#. module: alia_accounting_import
+#: code:addons/alia_accounting_import/wizard/alia_accounting_import_wizard.py:343
+#, python-format
+msgid "Excel format Error"
+msgstr "Error en el formato del fichero Excel"
+
+#. module: alia_accounting_import
+#: view:alia.account.import.wizard:0
+msgid "Preprocess File Options"
+msgstr "Opciones de preprocesado del fichero"
+
+#. module: alia_accounting_import
+#: field:alia.account.import.wizard,name_filter_closing_account_move:0
+msgid "Text filter for closing account move"
+msgstr "Filtro de texto para el asiento de cierre"
+
+#. module: alia_accounting_import
+#: model:ir.model,name:alia_accounting_import.model_alia_account_import_wizard
+msgid "alia.account.import.wizard"
+msgstr "alia.account.import.wizard"
+
+#. module: alia_accounting_import
+#: view:alia.account.import.wizard:0
+msgid "Process Account Moves"
+msgstr "Procesar Asientos"
+
+#. module: alia_accounting_import
+#: selection:alia.account.import.wizard,state:0
+msgid "aligment"
+msgstr "alineamiento"
+
+#. module: alia_accounting_import
+#: field:alia.account.import.wizard,default_period_id:0
+msgid "Default Period"
+msgstr "Periodo por Defecto"
+
+#. module: alia_accounting_import
+#: view:alia.account.import.wizard:0
+msgid "Process File"
+msgstr "Procesar fichero"
+
+#. module: alia_accounting_import
+#: field:alia.account.import.wizard,omit_last_rows:0
+msgid "Last rows to be omitted"
+msgstr "Número de filas finales a omitir"
+
+#. module: alia_accounting_import
+#: field:alia.account.import.wizard,account_move_confirm:0
+msgid "Automatic account move confirm"
+msgstr "Confirmación automática de asiento"
+
+#. module: alia_accounting_import
+#: field:alia.account.import.wizard,file_to_import:0
+msgid "File to import"
+msgstr "Fichero a importar"
+
+#. module: alia_accounting_import
+#: field:alia.account.import.wizard,account_automatic_params_search:0
+msgid "Automatic search for account params in creation process"
+msgstr "Búsqueda automática de parámetros para la creación de cuentas"
+
+#. module: alia_accounting_import
+#: model:ir.actions.act_window,name:alia_accounting_import.action_alia_import_account_moves
+#: model:ir.ui.menu,name:alia_accounting_import.menu_action_alia_account_importer
+msgid "Import account moves from EXCEL"
+msgstr "Importar asientos desde fichero EXCEL"
+
+#. module: alia_accounting_import
+#: field:alia.account.account.aligment,account_date:0
+msgid "Account Date"
+msgstr "Fecha del asiento"
+
+#. module: alia_accounting_import
+#: view:alia.account.import.wizard:0
+msgid "Create Accounts Moves"
+msgstr "Crear Asientos"
+
+#. module: alia_accounting_import
+#: view:alia.account.import.wizard:0
+msgid "General Account Paramenters"
+msgstr "Parámetros generales de asientos"
+
+#. module: alia_accounting_import
+#: field:alia.account.account.aligment,account_balance:0
+msgid "Account Balance"
+msgstr "Balance"
+
+#. module: alia_accounting_import
+#: field:alia.account.import.wizard,fixed_account_code_len:0
+msgid "Using fixed length for accounting matching"
+msgstr "Utilizar una longitud fija para alineamiento de cuentas"
+
+#. module: alia_accounting_import
+#: view:alia.account.import.wizard:0
+msgid "There are several options to import and align accounts that you can choose before."
+msgstr "Hay varias opciones para importar y alinear las cuentas de los asientos que se pueden escoger a continuación."
+
+#. module: alia_accounting_import
+#: view:alia.account.import.wizard:0
+msgid "(This option set a fixed length for account codes on comparission procedure for account matching)."
+msgstr "(Esta opción establece una longitud fija para el código de cuentas en el procedimiento de comparación para alinearlas)."
+
+#. module: alia_accounting_import
+#: field:alia.account.account.aligment,account_account_aligment_id:0
+#: field:alia.account.account.aligment,account_import_id:0
+#: field:alia.account.account.aligment,account_journal:0
+#: field:alia.account.account.aligment,account_period:0
+#: field:alia.account.account.match,account_import_id:0
+#: field:alia.account.import.wizard,account_aligments:0
+#: field:alia.account.import.wizard,account_matches:0
+#: field:alia.account.import.wizard,state:0
+msgid "unknown"
+msgstr "unknown"
+
+#. module: alia_accounting_import
+#: field:alia.account.account.aligment,account_credit:0
+msgid "Account Credit"
+msgstr "Crédito"
+
+#. module: alia_accounting_import
+#: view:alia.account.import.wizard:0
+msgid "Account import wizard"
+msgstr "Asistente de importación de asientos"
+
+#. module: alia_accounting_import
+#: field:alia.account.import.wizard,company_id:0
+msgid "Company"
+msgstr "Compañía"
+

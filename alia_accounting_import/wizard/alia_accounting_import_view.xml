@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+		<!-- FORM VIEW -->
+		<record model="ir.ui.view" id="alia_accounting_import_wizard_view">
+    		<field name="name">alia.accounting.import.wizard.view</field>
+    		<field name="model">alia.account.import.wizard</field>
+    		<field name="type">form</field>
+    		<field name="arch" type="xml">
+      			<form string="Account import wizard">
+      			    <label string="This wizard will import account moves from a EXCEL file." colspan="4"/>
+                    <label string="There are several options to import and align accounts that you can choose before." colspan="4"/>
+                    <label string="" colspan="4"/>
+                    <newline/>
+                    <group colspan="4">
+                    	<separator string="Excel file to import" colspan="3"/>
+      					<field name="file_to_import" />
+      				</group>
+      				<label string="" colspan="4"/>
+      				<group colspan="4">
+      					<separator string="Preprocess File Options" colspan="4"/>
+      					<field name="omit_init_rows" />
+      					<newline/>
+      					<field name="omit_last_rows" />
+      				</group>
+      				<label string="" colspan="4"/>
+      				<group colspan="4">
+      					<separator string="General Account Paramenters" colspan="4"/>
+      					<field name="default_journal_id"/>
+      					<newline/>
+      					<field name="company_id"/>
+      					<newline/>
+      					<field name="default_period_id"/>
+      				</group>
+      				<label string="" colspan="4"/>
+      				<group colspan="4">
+      					<separator string="Special Account Moves Filtering" colspan="4"/>
+      					<newline/>
+      					<field name="name_filter_opening_account_move"/>
+      					<newline/>
+      					<field name="name_filter_closing_account_move"/>
+      					<newline/>
+      					<field name="name_filter_results_account_move"/>
+      				</group>
+      				<label string="" colspan="4"/>
+      				<group colspan="4">
+      					<separator string="Account creation params" colspan="4"/>
+      					<newline/>
+      					<field name="account_automatic_params_search"/>
+      					<newline/>
+      					<field name="account_creation_on_fly"/>
+      				    <newline/>
+      					<field name="one_step_wizard"/>
+      				</group>
+      				<label string="" colspan="4"/>
+      				
+      				<group colspan="4">
+      					<separator string="Account alimgment options" colspan="4"/>
+      					<group colspan="1">
+      						<newline/>
+      						<field name="fixed_account_code_len"/>
+      						<newline/> 				            
+      						<field name="automatic_account_creation"/>
+      						<newline/>
+      						<field name="override_account_name"/>
+      						<newline/>
+      						<field name="account_move_confirm"/>
+      						<newline/>
+      					</group>
+      					<group colspan="3">
+      						<label string="(This option set a fixed length for account codes on comparission procedure for account matching)." colspan="3"/>
+                    		<label string="(This option allows to create automatically a new account for aligment in case of not match found)." colspan="3"/>
+                    		<label string="(This option overrides the account name if exists, with the account name from import file)." colspan="3"/>
+                    		<label string="(This option confirm the account moves automatically)." colspan="3"/>
+      					</group>
+      				</group>
+      				<newline/>
+      				<label string="" colspan="4"/>    
+         			<group colspan="4">
+         				<button name="process_file" string="Process File" type="object" />
+         			</group>
+      			</form>
+    		</field>
+   		</record>
+   		
+   		<record model="ir.ui.view" id="alia_accounting_import_precheck_wizard_view">
+    		<field name="name">alia.accounting.import.precheck.wizard.view</field>
+    		<field name="model">alia.account.import.wizard</field>
+    		<field name="type">form</field>
+    		<field name="arch" type="xml">
+      			<form string="Account import wizard">
+      				<group>
+          				<field name="account_matches" widget="one2many" height="450" nolabel="1">
+          					<tree editable="top">
+          						<field name="account_original_code"></field>
+          						<field name="account_name"></field>
+          						<field name="account_account_match_id"></field>
+          					</tree>
+          				</field>                
+          			</group>
+      				<newline/> 				            
+          			<group>
+         				<button name="process_account_moves" string="Process Account Moves" type="object" />
+         			</group>
+      			</form>
+    		</field>
+   		</record>
+   		
+   		<record model="ir.ui.view" id="alia_accounting_import_process_wizard_view">
+    		<field name="name">alia.accounting.import.process.wizard.view</field>
+    		<field name="model">alia.account.import.wizard</field>
+    		<field name="type">form</field>
+    		<field name="arch" type="xml">
+      			<form string="Account import wizard">
+      				<group>
+          				<field name="account_aligments" widget="one2many" height="450" nolabel="1">
+          					<tree editable="top">
+          						<field name="account_move_id"></field>
+          						<field name="account_move_line_id"></field>
+          						<field name="account_move_line_concept"></field>
+          						<field name="account_date"></field>
+          						<field name="account_period"></field>
+          						<field name="account_journal"></field>
+          						<field name="account_name"></field>
+          						<field name="account_debit"></field>
+          						<field name="account_credit"></field>
+          						<field name="account_balance"></field>
+          						<field name="account_account"></field>
+          						<field name="account_move_line_partner_id"/>
+          						<field name="account_move_concept"/>
+          						<field name="account_account_aligment_id" string="Aligment Account"></field>
+          					</tree>
+          				</field>                
+          			</group>
+      				<newline/> 				            
+          			<group>
+         				<button name="create_account_moves" string="Create Accounts Moves" type="object" />
+         			</group>
+      			</form>
+    		</field>
+   		</record>   		
+
+	</data>
+</openerp>

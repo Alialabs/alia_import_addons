@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		
+		
+		<act_window
+        id="action_alia_import_account_moves"
+        name="Import account moves from EXCEL"
+        res_model="alia.account.import.wizard"
+        src_model="account.move"
+        view_id="alia_accounting_import_wizard_view"
+        target="new"
+        groups="base.group_system" />
+		
+		<menuitem id="alia_account_import" parent="alia_base_imports.menu_alia_import_tools" name="Account Import Tools" groups="alia_base_imports.alia_import_group" sequence="10" />
+			<menuitem id="alia_account_import_from_excel" parent="alia_account_import" name="Account Moves Import from Excel" groups="alia_base_imports.alia_import_group" sequence="10" action="action_alia_import_account_moves"/>
+		
+		
+	
+		
+	</data>
+</openerp>
