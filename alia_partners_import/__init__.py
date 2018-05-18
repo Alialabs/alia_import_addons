@@ -33,5 +33,5 @@
 #
 ##############################################################################
 
-
-from . import wizard
+import wizard
+import alia_excel_formats_handler

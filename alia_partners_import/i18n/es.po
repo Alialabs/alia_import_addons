@@ -1,0 +1,231 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* alia_partners_import
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-18 15:45+0000\n"
+"PO-Revision-Date: 2018-05-18 15:45+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: alia_partners_import
+#: field:alia.partner.to.import,city:0
+msgid "City"
+msgstr "Ciudad"
+
+#. module: alia_partners_import
+#: field:alia.partners.import.wizard,omit_init_rows:0
+msgid "Init rows to be omitted"
+msgstr "Filas iniciales a omitir"
+
+#. module: alia_partners_import
+#: selection:alia.partners.import.wizard,importation_type:0
+msgid "CamCard"
+msgstr "CamCard"
+
+#. module: alia_partners_import
+#: view:alia.partners.import.wizard:0
+msgid "Create partners"
+msgstr "Crear contactos"
+
+#. module: alia_partners_import
+#: view:alia.partners.import.wizard:0
+msgid "Excel file to import"
+msgstr "Fichero Excel a importar"
+
+#. module: alia_partners_import
+#: field:alia.partner.to.import,customer:0
+msgid "customer"
+msgstr "Cliente"
+
+#. module: alia_partners_import
+#: selection:alia.partners.import.wizard,importation_type:0
+msgid "Standard Basic"
+msgstr "Standard Basic"
+
+#. module: alia_partners_import
+#: model:ir.ui.menu,name:alia_partners_import.alia_basic_partners_import
+msgid "Basic Partners Import (Excel)"
+msgstr "Importación básica de contactos (Excel)"
+
+#. module: alia_partners_import
+#: selection:alia.partners.import.wizard,type_address:0
+msgid "invoice"
+msgstr "factura"
+
+#. module: alia_partners_import
+#: model:ir.actions.act_window,name:alia_partners_import.action_alia_basic_partners_import
+msgid "Basic Partners import from EXCEL"
+msgstr "Importación básica de contactos (EXCEL)"
+
+#. module: alia_partners_import
+#: view:alia.partners.import.wizard:0
+msgid "Preprocess File Options"
+msgstr "Opciones de preprocesado de fichero"
+
+#. module: alia_partners_import
+#: field:alia.partners.import.wizard,vat_prefix:0
+msgid "VAT prefix"
+msgstr "Prefijo para el CIF"
+
+#. module: alia_partners_import
+#: field:alia.partners.import.wizard,company_id:0
+msgid "Company"
+msgstr "Compañía"
+
+#. module: alia_partners_import
+#: field:alia.partners.import.wizard,one_step_wizard:0
+msgid "Wizard without checking, directly creation"
+msgstr "Creación directa, sin pasos de revisión"
+
+#. module: alia_partners_import
+#: model:ir.model,name:alia_partners_import.model_alia_partners_import_wizard
+msgid "alia.partners.import.wizard"
+msgstr "alia.partners.import.wizard"
+
+#. module: alia_partners_import
+#: model:ir.ui.menu,name:alia_partners_import.alia_partners_import
+msgid "Partners Import Tools"
+msgstr "Herramientas de importación de contactos"
+
+#. module: alia_partners_import
+#: selection:alia.partners.import.wizard,state:0
+msgid "preprocess"
+msgstr "Preprocesamiento"
+
+#. module: alia_partners_import
+#: model:ir.model,name:alia_partners_import.model_alia_partner_to_import
+msgid "alia.partner.to.import"
+msgstr "alia.partner.to.import"
+
+#. module: alia_partners_import
+#: selection:alia.partners.import.wizard,importation_type:0
+msgid "Standard Extended"
+msgstr "Standard Extended"
+
+#. module: alia_partners_import
+#: field:alia.partners.import.wizard,omit_last_rows:0
+msgid "Last rows to be omitted"
+msgstr "Filas finales a omitir"
+
+#. module: alia_partners_import
+#: view:alia.partners.import.wizard:0
+msgid "Partners import wizard"
+msgstr "Asistente de importación de contactos"
+
+#. module: alia_partners_import
+#: field:alia.partner.to.import,name:0
+#: field:alia.partners.import.wizard,name:0
+msgid "Name"
+msgstr "Nombre"
+
+#. module: alia_partners_import
+#: field:alia.partner.to.import,zip:0
+msgid "ZIP"
+msgstr "Código Postal"
+
+#. module: alia_partners_import
+#: field:alia.partners.import.wizard,omit_creation_if_exists_reference:0
+msgid "Omit Creation if exists reference"
+msgstr "Omitir creación si existe la referencia"
+
+#. module: alia_partners_import
+#: selection:alia.partners.import.wizard,type_address:0
+msgid "delivery"
+msgstr "envío"
+
+#. module: alia_partners_import
+#: field:alia.partner.to.import,supplier:0
+msgid "supplier"
+msgstr "proveedor"
+
+#. module: alia_partners_import
+#: selection:alia.partners.import.wizard,state:0
+msgid "aligment"
+msgstr "alineamiento"
+
+#. module: alia_partners_import
+#: field:alia.partners.import.wizard,type_address:0
+msgid "Default Type Address"
+msgstr "Tipo de dirección por defecto"
+
+#. module: alia_partners_import
+#: field:alia.partner.to.import,vat:0
+msgid "VAT"
+msgstr "CIF"
+
+#. module: alia_partners_import
+#: view:alia.partners.import.wizard:0
+msgid "Process File"
+msgstr "Procesar fichero"
+
+#. module: alia_partners_import
+#: field:alia.partners.import.wizard,importation_type:0
+msgid "Format type"
+msgstr "Tipo de formato"
+
+#. module: alia_partners_import
+#: field:alia.partners.import.wizard,file_to_import:0
+msgid "File to import"
+msgstr "Fichero a importar"
+
+#. module: alia_partners_import
+#: view:alia.partners.import.wizard:0
+msgid "There are several options to import partners that you can choose before."
+msgstr "Existen diversas opciones de importación para escoger a continuación."
+
+#. module: alia_partners_import
+#: field:alia.partner.to.import,ref:0
+msgid "Reference"
+msgstr "Referencia"
+
+#. module: alia_partners_import
+#: selection:alia.partners.import.wizard,type_address:0
+msgid "default"
+msgstr "defecto"
+
+#. module: alia_partners_import
+#: field:alia.partners.import.wizard,omit_incorrect_vat:0
+msgid "Omit incorrect VATs"
+msgstr "Omitir CIF/NIF incorrectos"
+
+#. module: alia_partners_import
+#: field:alia.partner.to.import,street:0
+msgid "Street"
+msgstr "Calle"
+
+#. module: alia_partners_import
+#: view:alia.partners.import.wizard:0
+msgid "This wizard will import partners from a EXCEL file."
+msgstr "Este asistente importará contactos desde un fichero en Excel."
+
+#. module: alia_partners_import
+#: field:alia.partner.to.import,company_id:0
+#: field:alia.partner.to.import,wizard_id:0
+#: field:alia.partners.import.wizard,partners_list:0
+#: field:alia.partners.import.wizard,state:0
+msgid "unknown"
+msgstr "desconocido"
+
+#. module: alia_partners_import
+#: view:alia.partners.import.wizard:0
+msgid "Account import wizard"
+msgstr ""
+
+#. module: alia_partners_import
+#: selection:alia.partners.import.wizard,type_address:0
+msgid "other"
+msgstr "otro"
+
+#. module: alia_partners_import
+#: view:alia.partners.import.wizard:0
+msgid "General Partners Paramenters"
+msgstr "Parámetros generales de contactos"
+

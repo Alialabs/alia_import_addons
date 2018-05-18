@@ -65,6 +65,8 @@
       						<newline/>
       						<field name="override_account_name"/>
       						<newline/>
+      						<field name="banks_account_substitution"/>
+      						<newline/>
       						<field name="account_move_confirm"/>
       						<newline/>
       					</group>
@@ -72,6 +74,7 @@
       						<label string="(This option set a fixed length for account codes on comparission procedure for account matching)." colspan="3"/>
                     		<label string="(This option allows to create automatically a new account for aligment in case of not match found)." colspan="3"/>
                     		<label string="(This option overrides the account name if exists, with the account name from import file)." colspan="3"/>
+                    		<label string="(This option search an account associated to the bank, which is identified by entity reference column." colspan="3"/>
                     		<label string="(This option confirm the account moves automatically)." colspan="3"/>
       					</group>
       				</group>
@@ -128,7 +131,7 @@
           						<field name="account_balance"></field>
           						<field name="account_account"></field>
           						<field name="account_move_line_partner_id"/>
-          						<field name="account_move_concept"/>
+          						<field name="account_move_line_ref"/>
           						<field name="account_account_aligment_id" string="Aligment Account"></field>
           					</tree>
           				</field>                

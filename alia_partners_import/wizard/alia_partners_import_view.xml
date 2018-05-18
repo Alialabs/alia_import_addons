@@ -16,6 +16,8 @@
                     <group colspan="4">
                     	<separator string="Excel file to import" colspan="3"/>
       					<field name="file_to_import" />
+      					<newline/>
+      					<field name="importation_type"/>
       				</group>
       				<label string="" colspan="4"/>
       				<group colspan="4">
@@ -32,8 +34,12 @@
       					<field name="company_id"/>
       					<newline/>
       					<field name="vat_prefix"/>
+      					<newline/>
+      					<field name="type_address"/>
       				    <newline/>
       					<field name="omit_incorrect_vat"/>
+      				    <newline/>
+      					<field name="omit_creation_if_exists_reference"/>
       				</group>
       				<label string="" colspan="4"/>  
          			<group colspan="4">

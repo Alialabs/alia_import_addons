@@ -41,6 +41,7 @@ from osv import fields, osv
 from tools.translate import _
 from pip.utils import file_contents
 from datetime import datetime
+from sets import Set
 from alia_base_imports.alia_base_excel_file_handler import AliaBaseExcelFileHandler
 
 _logger = logging.getLogger(__name__)
@@ -68,7 +69,7 @@ class alia_account_account_aligment(osv.osv_memory):
                 'account_account_aligment_id':fields.many2one('account.account'),
                 'account_move_line_partner_id':fields.many2one('res.partner'),
                 'account_move_line_concept':fields.char('Account move line concept',size=128),
-                'account_move_concept':fields.char('Account move concept',size=128),
+                'account_move_line_ref':fields.char('Account move line ref',size=128),
                 }
     
 
@@ -106,6 +107,7 @@ class alia_account_import_wizard(osv.osv_memory):
                'name_filter_results_account_move':fields.char('Text filter for results account move',size=40),
                'account_matches':fields.one2many('alia.account.account.match','account_import_id'),
                'account_creation_on_fly':fields.boolean('Account creation on the fly. ¡HIGH RISK ON THIS PROCEDURE!'),
+               'banks_account_substitution':fields.boolean('Banks Account substitution using entity code column'),
                'account_automatic_params_search':fields.boolean('Automatic search for account params in creation process'),
                'state':fields.selection([('preprocess','preprocess'),('aligment','aligment')])
                }
@@ -274,8 +276,10 @@ class alia_account_import_wizard(osv.osv_memory):
     
     def _locate_res_partner_by_reference(self,cr,uid,ids,wzd,ref,context=None):
         partner_obj = self.pool.get('res.partner')
-        for p in partner_obj.search(cr,uid,[('ref','=',ref)],context=context):
-            return p
+        if ref:
+            for p in partner_obj.search(cr,uid,[('ref','=',ref)],context=context):
+                return p
+        return False
 
     def _locate_account_aligment(self,cr,uid,wzd,account_number_code, account_name, context=None):
         """
@@ -347,27 +351,29 @@ class alia_account_import_wizard(osv.osv_memory):
                     row_dict = {}
                     match_dict = {}
                     wizard_context = {}
-                    # Sanity-checks
-                    assert len(row)>=9, _("Excel format Error")
                     if row[3].value == None: #Discard intermedia empty lines
                         continue
-                    #datetime.strptime(str(row[2].value), '%d/%m/%y')
-                    
-                    row_date = row[2].value #Me cansan las fechas.
-                    #row_date = row_date.strftime("%Y-%m-%d")
                     
                     #To identify the account_move index                    
                     if row[0].value != None and row[0].value > 0 and row[0].value != account_move_id:
                         account_move_id = row[0].value
-                             
+                        
+                    #Check condition of account_account by reference
+                    if wizard_main_obj.banks_account_substitution:
+                        account_journals = self.pool.get('account.journal').search(cr,uid,[('code','like',row[9].value)],context=context)
+                        for a in account_journals:
+                            journal = self.pool.get('account.journal').browse(cr,uid,a,context=context)
+                            row[3].value = journal.default_debit_account_id.code
+                            row[4].value = journal.default_debit_account_id.name
+                         
                     row_dict['account_import_id'] = ids[0]
                     row_dict['account_move_id'] = account_move_id
                     row_dict['account_move_line_id'] = row[1].value
-                    row_dict['account_date'] = row_date  
+                    row_dict['account_date'] = row[2].value 
                     row_dict['account_account'] = row[3].value
                     row_dict['account_name'] = row[4].value
                     row_dict['account_move_line_concept'] = row[5].value
-                    row_dict['account_move_concept'] = row[10].value
+                    row_dict['account_move_line_ref'] = row[10].value
                     if row[6].value < 0:
                         row_dict['account_debit'] = 0.0
                         row_dict['account_credit'] = abs(row[6].value)
@@ -379,7 +385,7 @@ class alia_account_import_wizard(osv.osv_memory):
                         row_dict['account_credit'] = abs(row[7].value)
                     row_dict['account_balance'] = abs(row[6].value) - abs(row[7].value)
                     row_dict['account_journal'] = wizard_main_obj.default_journal_id.id
-                    row_dict['account_period'] = self._locate_account_move_period(cr,uid,ids,wizard_main_obj,row[5].value,row_date,wizard_main_obj.company_id,context=context)
+                    row_dict['account_period'] = self._locate_account_move_period(cr,uid,ids,wizard_main_obj,row[5].value,row[2].value,wizard_main_obj.company_id,context=context)
                     row_dict['account_move_line_partner_id'] = self._locate_res_partner_by_reference(cr,uid,ids,wizard_main_obj,row[9].value,context=context)
                     vals.append((0,0,row_dict))                                        
             
@@ -452,6 +458,7 @@ class alia_account_import_wizard(osv.osv_memory):
         account_move_id = False
         wzd = self.pool.get('alia.account.import.wizard').browse(cr,uid,ids[0],context=context)
         account_moves_to_confirm = []
+        concepts = Set([])
         for account_aligment in wzd.account_aligments:
             _logger.info("Create account move (%d) line %d",account_aligment.account_move_id,account_aligment.account_move_line_id)
             account_move_vals = {}
@@ -460,12 +467,13 @@ class alia_account_import_wizard(osv.osv_memory):
                 account_move_aux_id = account_aligment.account_move_id
                 account_move_vals['name'] = account_aligment.account_move_id
                 account_move_vals['date'] = account_aligment.account_date
-                account_move_vals['ref'] = account_aligment.account_move_concept
+                account_move_vals['ref'] = str(account_aligment.account_move_id)+' '+','.join(str(s) for s in concepts)
                 account_move_vals['state'] = "draft"
                 account_move_vals['period_id'] = account_aligment.account_period.id
                 account_move_vals['journal_id'] = account_aligment.account_journal.id
                 account_move_vals['company_id'] = wzd.company_id.id
                 account_move_id = self.pool.get('account.move').create(cr,uid,account_move_vals,context=context)
+                concepts.clear()
                 _logger.info("Account Move Created: %d",account_move_id)
                 if wzd.account_move_confirm:
                     account_moves_to_confirm.append(account_move_id)
@@ -480,6 +488,8 @@ class alia_account_import_wizard(osv.osv_memory):
             account_move_line_vals['period_id'] = account_aligment.account_period.id
             account_move_line_vals['credit'] = account_aligment.account_credit
             account_move_line_vals['debit'] = account_aligment.account_debit
+            if account_aligment.account_move_line_ref:
+                concepts.add(account_aligment.account_move_line_ref.encode('utf-8').strip())
             self.pool.get('account.move').write(cr,uid,[account_move_id],{'line_id':[(0,0,account_move_line_vals)]},context=context)
          
         #Check for automatic account move confirm

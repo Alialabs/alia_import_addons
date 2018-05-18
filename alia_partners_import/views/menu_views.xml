@@ -12,7 +12,7 @@
         	groups="alia_base_imports.alia_import_group" />
 		
 		<menuitem id="alia_partners_import" parent="alia_base_imports.menu_alia_import_tools" name="Partners Import Tools" groups="alia_base_imports.alia_import_group" sequence="10" />
-			<menuitem id="alia_basic_partners_import" parent="alia_partners_import" name="Basic Partners Import" groups="alia_base_imports.alia_import_group" sequence="10" action="action_alia_basic_partners_import"/>
+			<menuitem id="alia_basic_partners_import" parent="alia_partners_import" name="Basic Partners Import (Excel)" groups="alia_base_imports.alia_import_group" sequence="10" action="action_alia_basic_partners_import"/>
 		
 	</data>
 </openerp>

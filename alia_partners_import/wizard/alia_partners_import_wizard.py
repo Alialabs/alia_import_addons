@@ -41,6 +41,8 @@ from osv import fields, osv
 from tools.translate import _
 from pip.utils import file_contents
 from datetime import datetime
+from alia_partners_import.alia_excel_formats_handler import AliaExcelFormatsHandler
+from alia_base_imports.alia_base_excel_file_handler import AliaBaseExcelFileHandler
 
 
 _logger = logging.getLogger(__name__)
@@ -70,6 +72,8 @@ class alia_partner_to_import(osv.osv_memory):
 class alia_partners_import_wizard(osv.osv_memory):
     _name = 'alia.partners.import.wizard'
 
+    FORMATS = AliaExcelFormatsHandler().get_excel_supported_formats_list()
+
     _columns = {
                'name':fields.char('Name',size=128),
                'file_to_import':fields.binary('File to import',required=True),
@@ -79,7 +83,9 @@ class alia_partners_import_wizard(osv.osv_memory):
                'company_id': fields.many2one('res.company', 'Company', required=True),
                'vat_prefix':fields.char('VAT prefix',size=128),
                'omit_incorrect_vat':fields.boolean('Omit incorrect VATs'),
-               'type_address': fields.selection([('default','default'),('invoice','invoice'),('delivery','delivery'),('other','other')]),
+               'omit_creation_if_exists_reference':fields.boolean('Omit Creation if exists reference'),
+               'type_address': fields.selection([('default','default'),('invoice','invoice'),('delivery','delivery'),('other','other')],'Default Type Address',select="1"),
+               'importation_type': fields.selection(FORMATS,'Format type',select="1"),
                'partners_list': fields.one2many('alia.partner.to.import','wizard_id'),
                'state':fields.selection([('preprocess','preprocess'),('aligment','aligment')])
                }
@@ -87,6 +93,8 @@ class alia_partners_import_wizard(osv.osv_memory):
     _defaults = {
                  'name':"Wizard Import",
                  'state':'preprocess',
+                 'type_address':'default',
+                 'importation_type':'standard',
                  }
     
     
@@ -115,24 +123,17 @@ class alia_partners_import_wizard(osv.osv_memory):
         res_id = ir_model_data.browse(cr, uid, model_data_id, context=context).res_id
         try:
             wizard_main_obj = self.browse(cr, uid, ids[0])
-            decoded_data = base64.b64decode(wizard_main_obj.file_to_import)
-            xls_file = io.BytesIO(decoded_data)
-            wb = openpyxl.load_workbook(xls_file)
-            for sheet in wb._sheets:
+            xls_file = AliaBaseExcelFileHandler(wizard_main_obj.file_to_import)
+            xls_file.load_workbook(True)
+            for sheet in xls_file.get_sheets():
                 max_column = sheet.max_column
                 max_rows = sheet.max_row - wizard_main_obj.omit_last_rows
                 init_row_range = 1 + wizard_main_obj.omit_init_rows
                 vals = []
                 for row in sheet.iter_rows(min_row=init_row_range,max_col=max_column,max_row=max_rows):
-                    row_dict = {}
-                    row_dict['ref'] = row[0].value
-                    row_dict['name'] = row[1].value
-                    row_dict['vat'] = self.get_vat_number(cr,uid,wizard_main_obj,row[2].value,context)
-                    row_dict['street'] = row[3].value
-                    row_dict['city'] = row[4].value
-                    row_dict['zip'] = row[5].value
-                    row_dict['customer'] = True if int(row[6].value) > 0 else False
-                    row_dict['supplier'] = True if int(row[7].value) > 0 else False
+                    index_handler = AliaExcelFormatsHandler()
+                    row_dict = index_handler.get_row(wizard_main_obj.importation_type,row)
+                    row_dict['vat'] = self.get_vat_number(cr,uid,wizard_main_obj,row_dict['vat'],context)
                     row_dict['company_id'] = wizard_main_obj.company_id.id
                     vals.append((0,0,row_dict))                                                  
             self.write(cr,uid,ids,{'partners_list':vals,'state':'aligment'},context=context)
@@ -173,10 +174,18 @@ class alia_partners_import_wizard(osv.osv_memory):
             vals_partner['ref'] = partner.ref
             vals_partner['customer'] = partner.customer
             vals_partner['supplier'] = partner.supplier
-            vals_partner['company_id'] = partner.company_id.id
+            vals_partner['company_id'] = partner.company_id
             vals_partner['address'] = [(0,0,vals_address)]
-            partner_id = self.pool.get('res.partner').create(cr,uid,vals_partner,context=context)
-            _logger.info("Partner Created: %d",partner_id)         
+            if self.omit_creation_if_exists_reference:
+                if not self.pool.get('res.partner').search(cr,uid,[('ref','=',partner.ref)],context=context):
+                    partner_id = self.pool.get('res.partner').create(cr,uid,vals_partner,context=context)
+                    _logger.info("Partner Created: %d",partner_id)
+                else:
+                    _logger.info("Partner with reference %s already exists.",partner.ref)
+                    
+            else:
+                partner_id = self.pool.get('res.partner').create(cr,uid,vals_partner,context=context)
+                _logger.info("Partner Created: %d",partner_id)         
         return {
                 'type':'ir.actions.act_window_close',
         }
