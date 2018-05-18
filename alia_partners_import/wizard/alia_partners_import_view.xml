@@ -14,7 +14,7 @@
                     <label string="" colspan="4"/>
                     <newline/>
                     <group colspan="4">
-                    	<separator string="Excel file to import" colspan="3"/>
+                    	<separator string="Excel file to import (.xlsx)" colspan="3"/>
       					<field name="file_to_import" />
       					<newline/>
       					<field name="importation_type"/>
@@ -59,13 +59,18 @@
       				<group>
           				<field name="partners_list" widget="one2many" height="450" nolabel="1">
           					<tree editable="top">
+          						<field name="ref"></field>
           						<field name="name"></field>
+          						<field name="comercial"></field>
           						<field name="street"></field>
           						<field name="city"></field>
           						<field name="vat"></field>
           						<field name="zip"></field>
-          						<field name="ref"></field>
-          						<field name="company_id"></field>
+          						<field name="phone"></field>
+          						<field name="mobile"></field>
+          						<field name="fax"></field>
+          						<field name="email"></field>
+          						<field name="website"></field>
           						<field name="customer"></field>
           						<field name="supplier"></field>
           					</tree>

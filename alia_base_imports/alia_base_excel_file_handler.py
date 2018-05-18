@@ -32,6 +32,8 @@
 import openpyxl as openpyxl
 import base64,io
 from openpyxl.utils import get_column_letter
+from openerp.tools.translate import _
+from openerp.exceptions import Warning
 
 
 class AliaBaseExcelFileHandler:
@@ -43,11 +45,13 @@ class AliaBaseExcelFileHandler:
     def __init__(self, filepath=False):
         """
         :param filepath: string - book file path
-        """
+        """    
         self._filepath = filepath
         self._work_book = False
         self._sheet_names = False
         self._sheets_values = False
+        self.load_workbook(True)
+        
 
     def load_workbook(self, decode64, book_file_name=False):
         """
@@ -55,16 +59,15 @@ class AliaBaseExcelFileHandler:
         :param book_file_name: string - book file path
         :return:
         """
-        filepath = book_file_name or self._filepath
+        file = book_file_name or self._filepath
         if decode64:
-            decoded_data = base64.b64decode(filepath)
-            xls_file = io.BytesIO(decoded_data)
-            self._work_book = openpyxl.load_workbook(xls_file)
+            decoded_data = base64.b64decode(file)
+            file = io.BytesIO(decoded_data)
+        try:
+            self._work_book = openpyxl.load_workbook(file) 
             self._sheet_names = self._work_book.sheetnames
-        else:
-            self._work_book = openpyxl.load_workbook(filepath)
-            self._sheet_names = self._work_book.sheetnames
-
+        except IOError as e:
+            raise Warning("Not Workbook defined in EXCEL file. Probably you're using an incorrect format. Be sure it's an .xlsx file.")
 
     def _pos_process_row_dict(self, row_dict):
         """

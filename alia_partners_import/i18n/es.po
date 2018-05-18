@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-18 15:45+0000\n"
-"PO-Revision-Date: 2018-05-18 15:45+0000\n"
+"POT-Creation-Date: 2018-05-18 19:56+0000\n"
+"PO-Revision-Date: 2018-05-18 19:56+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -36,11 +36,6 @@ msgid "Create partners"
 msgstr "Crear contactos"
 
 #. module: alia_partners_import
-#: view:alia.partners.import.wizard:0
-msgid "Excel file to import"
-msgstr "Fichero Excel a importar"
-
-#. module: alia_partners_import
 #: field:alia.partner.to.import,customer:0
 msgid "customer"
 msgstr "Cliente"
@@ -66,9 +61,24 @@ msgid "Basic Partners import from EXCEL"
 msgstr "Importación básica de contactos (EXCEL)"
 
 #. module: alia_partners_import
+#: field:alia.partner.to.import,email:0
+msgid "Email"
+msgstr "Email"
+
+#. module: alia_partners_import
+#: field:alia.partner.to.import,website:0
+msgid "Website"
+msgstr "Web"
+
+#. module: alia_partners_import
 #: view:alia.partners.import.wizard:0
 msgid "Preprocess File Options"
 msgstr "Opciones de preprocesado de fichero"
+
+#. module: alia_partners_import
+#: field:alia.partner.to.import,fax:0
+msgid "Fax"
+msgstr "Fax"
 
 #. module: alia_partners_import
 #: field:alia.partners.import.wizard,vat_prefix:0
@@ -86,6 +96,11 @@ msgid "Wizard without checking, directly creation"
 msgstr "Creación directa, sin pasos de revisión"
 
 #. module: alia_partners_import
+#: field:alia.partner.to.import,phone:0
+msgid "Phone"
+msgstr "Phone"
+
+#. module: alia_partners_import
 #: model:ir.model,name:alia_partners_import.model_alia_partners_import_wizard
 msgid "alia.partners.import.wizard"
 msgstr "alia.partners.import.wizard"
@@ -94,6 +109,11 @@ msgstr "alia.partners.import.wizard"
 #: model:ir.ui.menu,name:alia_partners_import.alia_partners_import
 msgid "Partners Import Tools"
 msgstr "Herramientas de importación de contactos"
+
+#. module: alia_partners_import
+#: view:alia.partners.import.wizard:0
+msgid "Excel file to import (.xlsx)"
+msgstr "Fichero EXCEL a importar (.xlsx)"
 
 #. module: alia_partners_import
 #: selection:alia.partners.import.wizard,state:0
@@ -111,9 +131,14 @@ msgid "Standard Extended"
 msgstr "Standard Extended"
 
 #. module: alia_partners_import
-#: field:alia.partners.import.wizard,omit_last_rows:0
-msgid "Last rows to be omitted"
-msgstr "Filas finales a omitir"
+#: field:alia.partner.to.import,comercial:0
+msgid "Comercial Name"
+msgstr "Nombre Comercial"
+
+#. module: alia_partners_import
+#: field:alia.partners.import.wizard,importation_type:0
+msgid "Format type"
+msgstr "Tipo de formato"
 
 #. module: alia_partners_import
 #: view:alia.partners.import.wizard:0
@@ -135,6 +160,11 @@ msgstr "Código Postal"
 #: field:alia.partners.import.wizard,omit_creation_if_exists_reference:0
 msgid "Omit Creation if exists reference"
 msgstr "Omitir creación si existe la referencia"
+
+#. module: alia_partners_import
+#: field:alia.partner.to.import,mobile:0
+msgid "Mobile"
+msgstr "Móvil"
 
 #. module: alia_partners_import
 #: selection:alia.partners.import.wizard,type_address:0
@@ -167,9 +197,9 @@ msgid "Process File"
 msgstr "Procesar fichero"
 
 #. module: alia_partners_import
-#: field:alia.partners.import.wizard,importation_type:0
-msgid "Format type"
-msgstr "Tipo de formato"
+#: field:alia.partners.import.wizard,omit_last_rows:0
+msgid "Last rows to be omitted"
+msgstr "Filas finales a omitir"
 
 #. module: alia_partners_import
 #: field:alia.partners.import.wizard,file_to_import:0
@@ -217,7 +247,7 @@ msgstr "desconocido"
 #. module: alia_partners_import
 #: view:alia.partners.import.wizard:0
 msgid "Account import wizard"
-msgstr ""
+msgstr "Account import wizard"
 
 #. module: alia_partners_import
 #: selection:alia.partners.import.wizard,type_address:0

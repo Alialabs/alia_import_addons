@@ -3,7 +3,7 @@
 #
 #    Created on 6 de abril de 2018
 #
-#    @author:castor
+#    @author: alia
 #
 ##############################################################################
 #
@@ -50,24 +50,28 @@ _schema = logging.getLogger(__name__ + '.schema')
 
 
 
-
 class alia_partner_to_import(osv.osv_memory):
     _name = 'alia.partner.to.import'
     
     _columns = {
                 'name':fields.char('Name',size=128),
+                'comercial':fields.char('Comercial Name',size=128),
                 'street':fields.char('Street',size=128),
                 'vat':fields.char('VAT',size=128),
                 'zip':fields.char('ZIP',size=128),
                 'ref':fields.char('Reference',size=128),
                 'city':fields.char('City',size=128),
+                'phone':fields.char('Phone',size=128),
+                'mobile':fields.char('Mobile',size=128),
+                'fax':fields.char('Fax',size=128),
+                'email':fields.char('Email',size=128),
+                'website':fields.char('Website',size=128),
                 'customer':fields.boolean('customer'),
                 'supplier':fields.boolean('supplier'),
                 'company_id':fields.many2one('res.partner'),
                 'wizard_id':fields.many2one('alia.partners.import.wizard'),
                 }
  
-
 
 class alia_partners_import_wizard(osv.osv_memory):
     _name = 'alia.partners.import.wizard'
@@ -124,7 +128,6 @@ class alia_partners_import_wizard(osv.osv_memory):
         try:
             wizard_main_obj = self.browse(cr, uid, ids[0])
             xls_file = AliaBaseExcelFileHandler(wizard_main_obj.file_to_import)
-            xls_file.load_workbook(True)
             for sheet in xls_file.get_sheets():
                 max_column = sheet.max_column
                 max_rows = sheet.max_row - wizard_main_obj.omit_last_rows
@@ -153,13 +156,12 @@ class alia_partners_import_wizard(osv.osv_memory):
                     } 
         except Exception as e:
             _logger.error(e)
-            raise
-        
+            raise       
  
         
     def create_partners(self,cr,uid,ids,context=None):
         """
-        Description 
+        Description... 
         """
         wzd = self.pool.get('alia.partners.import.wizard').browse(cr,uid,ids[0],context=context)
         for partner in wzd.partners_list:
@@ -168,21 +170,26 @@ class alia_partners_import_wizard(osv.osv_memory):
             vals_address['street'] = partner.street
             vals_address['zip'] = partner.zip
             vals_address['city'] = partner.city
-            vals_address['type'] = 'default'  
+            vals_address['phone'] = partner.phone
+            vals_address['mobile'] = partner.mobile
+            vals_address['fax'] = partner.fax
+            vals_address['email'] = partner.email
+            vals_address['type'] = wzd.type_address
             vals_partner['name'] = partner.name
+            vals_partner['comercial'] = partner.comercial
+            vals_partner['website'] = partner.website
             vals_partner['vat'] = partner.vat
             vals_partner['ref'] = partner.ref
             vals_partner['customer'] = partner.customer
             vals_partner['supplier'] = partner.supplier
-            vals_partner['company_id'] = partner.company_id
+            vals_partner['company_id'] = partner.company_id.id
             vals_partner['address'] = [(0,0,vals_address)]
-            if self.omit_creation_if_exists_reference:
+            if wzd.omit_creation_if_exists_reference:
                 if not self.pool.get('res.partner').search(cr,uid,[('ref','=',partner.ref)],context=context):
                     partner_id = self.pool.get('res.partner').create(cr,uid,vals_partner,context=context)
                     _logger.info("Partner Created: %d",partner_id)
                 else:
-                    _logger.info("Partner with reference %s already exists.",partner.ref)
-                    
+                    _logger.info("Partner with reference %s already exists.",partner.ref)      
             else:
                 partner_id = self.pool.get('res.partner').create(cr,uid,vals_partner,context=context)
                 _logger.info("Partner Created: %d",partner_id)         
